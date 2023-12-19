@@ -1,0 +1,44 @@
+{% extends "workout/layout.html" %}
+
+
+{% block title %}
+Registration
+{% endblock %}
+
+{% block body %}
+
+<h2 class="m-5 text-center">Registration for {{ role_select | capfirst }}s</h2>
+
+<form action="{% url 'register' role_select %}" method="post" class="user-form container my-5 p-5 rounded {{role_select}}">
+    {% csrf_token %}
+    {{ role_select }}
+    <div class="form-group">
+        {{ form }}
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Account type:</label>
+        <select class="form-control" id="exampleFormControlSelect1" name="account_type">
+          <option>{{ role_select | capfirst }}</option>
+        </select>
+        <br>
+        <div>Not a {{ role_select | capfirst }}. Click here to sign up for a 
+            {% if role_select == 'customer' %}
+            <a href="{% url 'register' 'trainer' %}">Trainer</a>
+            {% else %}
+            <a href="{% url 'register' 'customer' %}">Customer</a>
+            {% endif %}
+            account.
+            <br>
+            (The account type can not be changed at a later point!)
+            <br>
+        </div>
+
+    </div>
+
+    <input class="btn btn-light" type="submit" value="Create Account">
+    </form>
+
+
+
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "workout/layout.html" %}
+{% load static %}
+
+
+{% block title %}
+Workout View
+{% endblock %}
+
+{% block body %}
+
+<div class="container-sm my-5">
+
+    <h2 class="mb-4">Workout View</h2>
+
+    <form action="{% url 'workout_view' workout_id %}" method="post" class="my-3 p-5 rounded d-flex flex-column" id="add-workout-form">
+        {% csrf_token %}
+        
+        <div class="form-group d-flex flex-row align-items-center py-4" style="flex-wrap: wrap; column-gap: 20px; row-gap: 20px; max-width: 1200px;">
+            {{ workout_details }}
+        </div>
+
+        <input class="btn btn-dark" type="submit" value="Update" style="width: 80px;">
+    </form>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Sequence</th>
+                <th scope="col">Exercise</th>
+                <th scope="col" class="reps">Reps</th>
+                <th scope="col" class="reps">Weight</th>
+                <th scope="col" class="save"></th>
+                <th scope="col" class="edit">Update</th>
+            </tr>
+        </thead>
+        <tbody id="workout-exercise-list">
+            {% if workout_exercises %}
+            {% for exercise in workout_exercises %}
+            <tr id="workout-exercise-{{ exercise.id }}">
+                <td><span class="material-symbols-rounded" id="delete-icon" data-exercise="{{ exercise.id }}">
+                        delete
+                    </span>
+                    <span class="material-symbols-rounded" id="arrow-up-icon" data-exercise="{{ exercise.id }}">
+                        arrow_drop_up
+                    </span>
+                    <span class="material-symbols-rounded" id="arrow-down-icon" data-exercise="{{ exercise.id }}">
+                        arrow_drop_down
+                    </span>    
+                
+                
+                </td>
+                <td id="sequence-nr">{{ exercise.sequence_nr }}</td>
+                <td>{{ exercise.exercise }}</td>
+                
+                <td colspan="3">
+                    <table class="table align-middle" id="stats-form" data-exercise="{{ exercise.id }}">
+                        
+                        <tbody>
+                            {% for set in exercise.workout_sets.all %}
+                            <tr id="workout-set-{{ set.id }}">
+                                <td class="reps">{{ set.reps }}</td>
+                                <td class="weight">{{ set.weight }}</td>
+                                <td class="save"></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                        </table>
+                </td>
+                <td class="edit"><span class="material-symbols-rounded" id="modify-stats-icon" data-exercise="{{ exercise.id }}">
+                    table_view
+                </span></td>
+
+            </tr>
+            {% endfor%}
+            {% else %}
+            <tr class="class-row" id="no-workout">
+                <td>No exercises to show.</td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+   
+    <form action="{% url 'workout_view' workout_id %}" method="post" class="my-3 p-5 rounded" id="add-exercise-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            {{ new_exercise_form }}
+        </div>
+
+        <input class="btn btn-dark" type="submit" value="Add" style="width: 80px;">
+    </form>
+
+
+</div>
+
+
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'workout/workout-view.js' %}"></script>
+{% endblock %}  

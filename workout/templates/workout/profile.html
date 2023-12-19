@@ -1,0 +1,129 @@
+{% extends "workout/layout.html" %}
+
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block body %}
+    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+
+            <div class="container-fluid p-5 d-flex justify-content-center">
+                {% if profile_user.pic %}
+                <img src="{{ profile_user.pic.url }}" height="200px">
+                {% else %}
+                    {% if profile_user.gender == 'M' %}
+                        <img src="/media/pics/male.svg" height="200px">
+                    {% else %}
+                        <img src="/media/pics/female.svg" height="200px">
+                        {% endif %}        
+                {% endif %}
+            </div>
+
+            <div class="container-fluid p-3 d-flex flex-column justify-content-center">
+                <table class="table">
+                    <tbody>
+
+                        <tr>
+                            <td class="details-label">Username:</td>
+                            <td>{{ profile_user.username }}</td>
+                        </tr>
+                        <tr>
+                            <td class="details-label">First name:</td>
+                            <td>{{ profile_user.first_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="details-label">Last name:</td>
+                            <td>{{ profile_user.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="details-label">Email:</td>
+                            <td>{{ profile_user.email }}</td>
+                        </tr>
+
+                        {% if details_user.date_of_birth %}
+                        <tr>
+                            <td class="details-label">DOB:</td>
+                            <td>{{ details_user.date_of_birth }}</td>
+                        </tr>
+                        {% endif %}
+
+                        {% if details_user.start_year %}
+                        <tr>
+                            <td class="details-label">Trainer since:</td>
+                            <td>{{ details_user.start_year }}</td>
+                        </tr>
+                        {% endif %}
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="container-fluid p-3 d-flex flex-row justify-content-center">
+            
+            <div class="mx-5"><a role="button" class="btn btn-warning" href="{% url 'change_profile' %}">Change Profile</a></div> 
+            <div class="mx-5 justify-content-between"><a role="button" class="btn btn-warning" href="{% url 'change_password' %}">Change Password</a></div>
+            </div>
+
+        </div>
+
+        <div class="col bg-secondary rounded m-5 p-3">
+        {% if profile_user.role == 'CUSTOMER' %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Logged</th>
+                        <th scope="col">Body weight</th>
+                        <th scope="col">Muscle mass</th>
+                        <th scope="col">Body fat %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stats in stats_user %}
+                    <tr>
+                        <td>{{ stats.created_on }}</td>
+                        <td>{{ stats.body_weight }}</td>
+                        <td>{{ stats.muscle_mass }}</td>
+                        <td>{{ stats.body_fat_p }}</td>
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+
+            <a role="button" class="btn btn-warning" href="{% url 'add_body_stats' profile_user.id %}">Add Stats</a>
+            
+            {% else %}
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Total Workouts</th>
+                        <th scope="col">Last Workout</th>
+                        <th scope="col">Next Workout</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in stats_user %}
+                    <tr class="class-row">
+                        <td><a href="{% url 'profile' customer.id %}" class="rowlink">{{ customer.first_name }} {{ customer.last_name }}</a></td>
+                        <td>{{ customer.get_user_workout_count }}</td>
+                        <td>{{ customer.get_user_last_workout.scheduled_date }}</td>
+                        <td>{{ customer.get_user_next_workout.scheduled_date }}</td>
+
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+            
+            {% endif %}
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

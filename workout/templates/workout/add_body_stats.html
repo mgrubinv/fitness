@@ -1,0 +1,26 @@
+{% extends "workout/layout.html" %}
+
+{% block title %}
+Record Biometrics
+{% endblock %}
+
+{% block body %}
+
+    <form action="{% url 'add_body_stats' customer_id %}" method="post" class="user-form container-sm my-5">
+        {% csrf_token %}
+
+        <h2 class="mb-4">Record Biometrics</h2>
+
+        <div class="form-group">
+        {{ form.as_p }}
+        </div>
+
+        <input class="btn btn-secondary" type="submit" value="Add">
+    
+        
+
+    </form>
+
+    
+
+{% endblock %}

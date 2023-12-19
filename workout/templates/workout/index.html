@@ -1,0 +1,30 @@
+{% extends "workout/layout.html" %}
+
+
+{% block title %}
+Personal Training Log
+{% endblock %}
+
+{% block body %}
+    
+
+<div class="container-sm d-flex flex-column justify-content-center">
+
+    <div class="m-5 text-center"><img src="/media/MG PT Logo only final.png" style="max-width: 200px"></div>
+
+    <h2 class="text-center">Personal Training Log</h2>        
+
+    {% if user.is_authenticated %}
+    <div class="text-center mt-3">Welcome back, <strong>{{ user.first_name }}</strong>!</div>
+    <div class="text-center mt-3">Check out your latest workouts in our detailed: <a href="{% url 'workout_list' '0' %}">Workout List</a></div>
+
+    {% else %}
+    <div class="text-center mt-3">Already have an account? <a href="{% url 'login_user' %}">Log In here.</a></div>
+    <div class="text-center mt-3">Don't have an account? <a href="{% url 'register' 'select'%}">Register here.</a></div>
+
+    {% endif %}
+
+
+</div>
+
+{% endblock %}

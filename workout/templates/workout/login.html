@@ -1,0 +1,32 @@
+{% extends "workout/layout.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+
+{% block body %}
+
+    <form action="{% url 'login_user' %}" method="post" class="user-form container-sm my-5">
+        {% csrf_token %}
+
+        <h2 class="mb-4">Login</h2>
+
+        {% if message %}
+        <h5 class="error_message">{{ message }}</h5>
+        {% endif %}
+
+        <div class="form-group">
+        {{ form }}
+        </div>
+
+        <input class="btn btn-warning" type="submit" value="Login">
+    
+        <div class="mt-5">Don't have an account? <a href="{% url 'register' 'select' %}">Register here.</a></div>
+        
+
+    </form>
+
+    
+
+{% endblock %}
