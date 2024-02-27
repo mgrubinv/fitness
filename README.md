@@ -7,9 +7,11 @@ Video overview: <https://youtu.be/fULhp1YcxKA>
 
 ## Distinctiveness and Complexity
 
-For the final project I have build a web application for Personal Trainers and their customers to log training records and customer body stats biometrics.
+This project was my final project of Harvard's CS50 Web Programming with Python and JavaScript. The requriment was to develop a web application of my own idea and entirely from scratch. The project utilizes the Django framework. The main programming language used is Python supported by JavaScript, CSS and HTML code.
 
-I have based my work on following criterias to be distinctive and offering additional complexity:
+For the subject I have chose to build a web application for Personal Trainers and their customers to log training records and customer body stats biometrics.
+
+I have based my work on following criterias to be distinctive and offering additional complexity to the material learned in the course:
 
 1. Being a Personal Trainer myself, I have developed the application based on my personal experiece which functionality a trainer and his customers would be interested in.
 
@@ -204,21 +206,11 @@ CSS `styles.css`
 
 I have run this application and all previous projects of this course on a `conda` environment on a `win-64` system. The full specifications of the environment can be found in the `requirements.txt` file.
 
-The project's main directory `capstone` contains the Django project `fitness` with a single app called `workout`.
+The project's main directory `fitness` contains the Django project `fitness` with a single app called `workout`.
 
 The project can be started from the terminal in the main directory with `python manage.py runserver`.
 
-The sqlite3 database `db.sqlite3` has been pre-filled with example data for a few customers and trainers. This can be accessed with following example user profile login details.
-
-Example customer profile:
-Username: sue
-Password: sue12345
-
-Example trainer profile:
-Username: paul
-Password: paul12345
-
-Additionally you will be able to create new customers or trainers and add workout details directly.
+The sqlite3 database `db.sqlite3` has been pre-filled with example data for a few customers and trainers. Additionally you will be able to create new customers or trainers and add workout details directly.
 
 
 ## Limitations
