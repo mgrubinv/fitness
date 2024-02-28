@@ -2,14 +2,11 @@
 
 By Matthias Gruber
 
-Video overview: <https://youtu.be/fULhp1YcxKA>
-
-
 ## Distinctiveness and Complexity
 
-This project was my final project of Harvard's CS50 Web Programming with Python and JavaScript. The requriment was to develop a web application of my own idea and entirely from scratch. The project utilizes the Django framework. The main programming language used is Python supported by JavaScript, CSS and HTML code.
+This project was my final project of Harvard's CS50 Web Programming with Python and JavaScript. The requirement was to develop a web application of my own idea and entirely from scratch. The project utilizes the Django framework. The main programming language used is Python supported by JavaScript, CSS and HTML code.
 
-For the subject I have chose to build a web application for Personal Trainers and their customers to log training records and customer body stats biometrics.
+`Personal Training Log` is a web application for Personal Trainers and their customers to log training records and customer body stats biometrics.
 
 I have based my work on following criterias to be distinctive and offering additional complexity to the material learned in the course:
 
@@ -225,5 +222,4 @@ The current version of this applications has following limitaions which I would 
 * Body stats biometrics can not be amended or deleted (only from the admin interface).
 
 
-
-
+Video overview: <https://youtu.be/fULhp1YcxKA>
